@@ -1,0 +1,9 @@
+﻿@page "/switches"
+
+<PageTitle>Switches</PageTitle>
+
+@if(Project != null && SelectedSwitch != null)
+{ 
+    <button class="btn btn-secondary mb-2" @onclick="async ()=> await Export()" >Export</button>   
+    <SwitchEditor Project="Project" NetworkSwitch="SelectedSwitch" />
+}

@@ -1,0 +1,6 @@
+﻿@using System.Net;
+@using Microsoft.AspNetCore.Components.Forms;
+
+@inherits InputBase<IPAddress>
+
+<input @attributes="AdditionalAttributes" @bind-value="IPAddressAsString" />

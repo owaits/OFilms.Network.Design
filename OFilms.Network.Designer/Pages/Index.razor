@@ -1,0 +1,25 @@
+﻿@page "/"
+
+<PageTitle>Index</PageTitle>
+
+@if(Project != null)
+{
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">
+                <input type="text" class="form-control"  @bind-value="@Project.Name" placeholder="Project Name"/>
+            </h5>
+            <textarea type="text" class="form-control mb-2" rows="4" @bind="@Project.Description" placeholder="Project Description" />
+            <textarea type="text" class="form-control" rows="6" @bind="@Project.Notes" placeholder="Project Notes" />
+
+            <div class="form-group">
+                <label for="user">User Name</label>
+                <input type="text" id="user" class="form-control" @bind-value="@Project.UserName" />
+            </div>
+            <div class="form-group">
+                <label for="password">Encrypted Password</label>
+                <input type="text" id="password" class="form-control" @bind-value="@Project.EncryptedPassword" />
+            </div>
+        </div>
+    </div>
+}

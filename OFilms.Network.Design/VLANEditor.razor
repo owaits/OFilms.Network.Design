@@ -1,0 +1,46 @@
+﻿
+@if(Project != null)
+{
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th colspan="3">
+                    <div class="d-flex">
+                        <span>Network VLANs</span>
+                        <button class="btn btn-primary btn-sm ml-auto" @onclick="()=> CreateVLAN()">ADD</button>
+                    </div>
+                </th>
+            </tr>
+            <tr>
+                <th width="20%">VLAN ID</th>
+                <th>Name</th>
+                <th width="20px"></th>
+            </tr>
+        </thead>
+
+        @foreach(var vlan in Project.VLANS)
+        {
+            @if(vlan == EditItem)
+            {
+                <tr>
+                    <td><input type="number" class="form-control" @bind-value="@vlan.ID" /></td>
+                    <td><input type="text" class="form-control" @bind-value="@vlan.Name" /></td>
+                    <td><button class="btn btn-primary btn-sm ml-auto" @onclick="()=> EditVLAN(null)"><i class="fas fa-check" /></button></td>
+                </tr>
+            }
+            else
+            {
+                <tr>
+                    <td>@vlan.ID</td>
+                    <td>@vlan.Name</td>
+                    <td><button class="btn btn-primary btn-sm ml-auto" @onclick="()=> EditVLAN(vlan)"><i class="fas fa-pencil" /></button></td>
+                </tr> 
+            }
+
+        }
+    </table>
+}
+
+
+
+

@@ -1,0 +1,50 @@
+﻿@using OFilms.Network.Project.Principals;
+@if (Project != null && NetworkSwitch != null)
+{
+    <table class="table table-sm">
+        <thead class="thead-dark">
+            <tr>
+                <th colspan="5">
+                    <div class="d-flex mx-1">
+                        <input type="text" class="form-control bg-dark text-white" @bind-value="@NetworkSwitch.Name" placeholder="Switch Name" />
+                    </div>
+                </th>
+            </tr>
+            <tr>
+                <th colspan="5">
+                    <div class="form-row mx-1">                        
+                        <InputIPAddress class="form-control bg-dark text-white col-6" @bind-Value="@NetworkSwitch.Address" placeholder="IP Address" />
+                        <input type="text" class="form-control bg-dark text-white col-6" @bind-value="@NetworkSwitch.ModelNumber" placeholder="Model Number" />                        
+                    </div>
+                </th>
+            </tr>
+            <tr>
+                <th width="100px">PORT</th>
+                <th width="100px">LINK</th>
+                <th>UnTag / Tag</th>
+                <th>Membership</th>
+                <th width="50%">Label</th>
+                
+            </tr>
+        </thead>
+
+        @foreach (var port in NetworkSwitch.Ports)
+        {
+            <tr>
+                <td>@(port.Index)</td>
+                <td><button class="btn btn-sm w-100 @(port.Link == PortLinkType.Trunk ? "btn-warning" : "btn-secondary")" @onclick="() => ToggleLink(port)">@port.Link</button></td>
+                <td>
+                    <div class="btn-group">
+                        @foreach (var vlan in Project.VLANS)
+                        {
+                            <button style="@(port.Membership.Contains(vlan.ID) ?$"background-color: {vlan.Colour}": "")" class="btn btn-sm @(port.Membership.Contains(vlan.ID) ? "btn-secondary" : "btn-outline-secondary")" @onclick="()=> ToggleVLANMembership(port, vlan)">@vlan.ID</button>
+                        }
+                    </div>
+
+                </td>
+                <td>@MembershipLabel(port)</td>
+                <td><input type="text" class="form-control" @bind-value="@port.Label" /></td>
+            </tr>
+        }
+    </table>
+}
